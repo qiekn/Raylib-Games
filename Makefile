@@ -6,6 +6,9 @@ OUT = build
 minesweeper:
 	$(CXX) $(CXXFLAGS) $(SRC)/minesweeper.cpp -o ./$(OUT)/minsweeper && $(OUT)/minsweeper && ./$(OUT)/minesweeper
 
+snake:
+	$(CXX) $(CXXFLAGS) $(SRC)/snake.cpp -o ./$(OUT)/snake && $(OUT)/snake && ./$(OUT)/snake
+
 default:
 	$(CXX) $(CXXFLAGS) $(SRC)/main.cpp -o $(OUT)/main && $(OUT)/main && ./$(OUT)/main
 
