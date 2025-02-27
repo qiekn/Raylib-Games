@@ -1,5 +1,4 @@
-#ifndef OBJECT_H
-#define OBJECT_H
+#pragma once
 
 #include <climits>
 #include <memory>
@@ -52,9 +51,5 @@ public:
     return res;
   }
 
-  virtual ~Entity() {
-    // std::cout << "!";
-  }
+  virtual ~Entity() {}
 };
-
-#endif
