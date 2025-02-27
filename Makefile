@@ -1,12 +1,13 @@
 CXX = clang++
 CXXFLAGS = -std=c++17 -framework CoreVideo -framework IOKit -framework Cocoa -framework GLUT -framework OpenGL -Llib -Iinclude -lraylib
-OUT_DIR = build
+SRC = src
+OUT = build
 
 minesweeper:
-	$(CXX) $(CXXFLAGS) minesweeper.cpp -o $(OUT_DIR)/minsweeper && ./$(OUT_DIR)/minsweeper
+	$(CXX) $(CXXFLAGS) $(SRC)/minesweeper.cpp -o ./$(OUT)/minsweeper && $(OUT)/minsweeper && ./$(OUT)/minesweeper
 
 default:
-	$(CXX) $(CXXFLAGS) main.cpp -o $(OUT_DIR)/main && ./$(OUT_DIR)/main
+	$(CXX) $(CXXFLAGS) $(SRC)/main.cpp -o $(OUT)/main && $(OUT)/main && ./$(OUT)/main
 
 clean:
-	rm -rf $(OUT_DIR)/*
+	rm $(OUT)/*
