@@ -1,5 +1,4 @@
-#ifndef UTIL_H
-#define UTIL_H
+#pragma once
 
 #include <string>
 #include <memory>
@@ -62,4 +61,3 @@ inline bool isSymbol(std::shared_ptr<Entity> o) {
     return false;
 }
 
-#endif
