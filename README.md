@@ -13,8 +13,9 @@ mkdir build
 cd build
 cmake ..
 make -j${proc}
-./demo
+./witness
 ```
 
 ## References
+
 [witness-clone](https://normalexisting.itch.io/witness-clone)
