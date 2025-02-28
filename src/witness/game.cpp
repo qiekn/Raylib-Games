@@ -56,7 +56,7 @@ int SCORE = 0;
 
 bool EnableSkip = true;
 bool SkipShowsSolution = false;
-bool EnableShowSolution = false;
+bool EnableShowSolution = true;
 bool IN_SETTINGS = false;
 int P_LATENCY = 0;
 
@@ -310,13 +310,13 @@ void render(Grid& g, const int width, const int height, double marginprop = 0.1,
 
 inline void drawTitleScreen(int screenWidth, int screenHeight) {
   ClearBackground(BLACK);
-  double cx = screenWidth / 2;
-  double cy = screenHeight / 2;
+  double cx = screenWidth / 2.0;
+  double cy = screenHeight / 2.0;
 
   const int FS = 40;
   const double SP = cy * 0.2;
 
-  DrawCenteredText("WELCOME TO WITNESS_CLONE", cx, SP, FS, WHITE);
+  DrawCenteredText("Weclone to Witness(clone)", cx, SP, FS, WHITE);
   DrawCenteredText("PRESS RMB TO BEGIN", cx, SP + FS, FS, WHITE);
 
   DrawCenteredText("LMB TO DRAW LINES/SUBMIT", cx, SP + 3 * FS, FS, WHITE);
@@ -362,29 +362,26 @@ inline Color onoffdim(bool b) {
 
 inline void doSettings(int screenWidth, int screenHeight) {
   ClearBackground(BLACK);
-  double cx = screenWidth / 2;
-  double cy = screenHeight / 2;
+  double cx = screenWidth / 2.0;  // center pos_x
+  double cy = screenHeight / 2.0; // center pox_y
 
-  const int FS = 40;
+  const int FS = 40; // fontsize
   const double SP = std::max(60.0, cy * 0.2);
-
-  const double BL = 600;
-  const double BH = 50;
   const double BS = 60;
-  const double BD = 4;
+  const double BL = 600; // button length
+  const double BH = 50;  // button height
+  const double BD = 4;   // button border
 
   DrawCenteredText("GAME SETTINGS", cx, 0, FS, WHITE);
-  DrawCenteredButton("TRIANGLES", cx, SP, BL, BH, [] {toggleSettings(0);}, FS, WHITE, onoffcol(P_TRIX), onoffdim(P_TRIX), BD);
-  DrawCenteredButton("TERNARY BLOBS", cx, SP + BS, BL, BH, [] {toggleSettings(1);}, FS, WHITE, onoffcol(P_BLOB3), onoffdim(P_BLOB3), BD);
-  DrawCenteredButton("BINARY BLOBS", cx, SP + 2 * BS, BL, BH, [] {toggleSettings(2);}, FS, WHITE, onoffcol(P_BLOB2), onoffdim(P_BLOB2), BD);
-  DrawCenteredButton("BLOCKS", cx, SP + 3 * BS, BL, BH, [] {toggleSettings(3);}, FS, WHITE, onoffcol(P_BLOCK), onoffdim(P_BLOCK), BD);
-  DrawCenteredButton("STARS + DOTS", cx, SP + 4 * BS, BL, BH, [] {toggleSettings(4);}, FS, WHITE, onoffcol(P_STARDOT), onoffdim(P_STARDOT), BD);
-  DrawCenteredButton("DOTS", cx, SP + 5 * BS, BL, BH, [] {toggleSettings(5);}, FS, WHITE, onoffcol(P_DOT), onoffdim(P_DOT), BD);
-  DrawCenteredButton("MAZE", cx, SP + 6 * BS, BL, BH, [] {toggleSettings(6);}, FS, WHITE, onoffcol(P_MAZE), onoffdim(P_MAZE), BD);
-  DrawCenteredButton("STARS", cx, SP + 7 * BS, BL, BH, [] {toggleSettings(7);}, FS, WHITE, onoffcol(P_STAR), onoffdim(P_STAR), BD);
+  DrawCenteredButton("Triangle", cx, SP, BL, BH, [] {toggleSettings(0);}, FS, WHITE, onoffcol(P_TRIX), onoffdim(P_TRIX), BD);
+  DrawCenteredButton("Ternary Squares", cx, SP + BS, BL, BH, [] {toggleSettings(1);}, FS, WHITE, onoffcol(P_BLOB3), onoffdim(P_BLOB3), BD);
+  DrawCenteredButton("Binary Squares", cx, SP + 2 * BS, BL, BH, [] {toggleSettings(2);}, FS, WHITE, onoffcol(P_BLOB2), onoffdim(P_BLOB2), BD);
+  DrawCenteredButton("Tetris", cx, SP + 3 * BS, BL, BH, [] {toggleSettings(3);}, FS, WHITE, onoffcol(P_BLOCK), onoffdim(P_BLOCK), BD);
+  DrawCenteredButton("Stars + Hexagons", cx, SP + 4 * BS, BL, BH, [] {toggleSettings(4);}, FS, WHITE, onoffcol(P_STARDOT), onoffdim(P_STARDOT), BD);
+  DrawCenteredButton("Hexagons", cx, SP + 5 * BS, BL, BH, [] {toggleSettings(5);}, FS, WHITE, onoffcol(P_DOT), onoffdim(P_DOT), BD);
+  DrawCenteredButton("Maze", cx, SP + 6 * BS, BL, BH, [] {toggleSettings(6);}, FS, WHITE, onoffcol(P_MAZE), onoffdim(P_MAZE), BD);
+  DrawCenteredButton("Stars", cx, SP + 7 * BS, BL, BH, [] {toggleSettings(7);}, FS, WHITE, onoffcol(P_STAR), onoffdim(P_STAR), BD);
   DrawCenteredButton("RESET PROGRESS", cx, screenHeight - 60, BL, BH, [] {resetProgress();}, FS, WHITE, BLUE, DARKBLUE, BD);
-
-
 }
 
 // Main method
@@ -402,7 +399,7 @@ int main() {
   cout << "Hello World" << endl;
 
   InitWindow(screenWidth, screenHeight, "");
-  SetTargetFPS(60);
+  SetTargetFPS(144);
 
   while (WindowShouldClose() == false){
     BeginDrawing();
@@ -792,11 +789,10 @@ int main() {
 
 
     // UI
-
     if (STARTED) {
-      DrawFPS(10, 10);
+      // DrawFPS(10, 10);
       std::string scoredata = std::to_string(SCORE) + " SOLVED";
-      DrawText(scoredata.c_str(), 10, 35, 20, WHITE);
+      DrawText(scoredata.c_str(), 10, 10, 20, WHITE);
 
       if (EnableSkip) {
 
@@ -826,9 +822,8 @@ int main() {
       }
 
       if (EnableShowSolution) {
-
         DrawRectangle(screenWidth - 80, screenHeight - 96, 128, 48, GRAY);
-        DrawText("?", screenWidth - 64, screenHeight - 88, 32, WHITE);
+        DrawText("Hint", screenWidth - 64, screenHeight - 88, 32, WHITE);
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
           auto mpmp = GetMousePosition();
           if (mpmp.x >= screenWidth - 80 && mpmp.y >= screenHeight - 96 && mpmp.y < screenHeight - 48) {
@@ -840,7 +835,6 @@ int main() {
             sx.activate();
           }
         }
-
       }
 
     }
@@ -851,26 +845,3 @@ int main() {
   CloseWindow();
   return 0;
 }
-
-/*
-
-
-        BeginDrawing();
-        ClearBackground(BLACK);
-        ball_x += ball_speed_x;
-        ball_y += ball_speed_y;
-
-        if(ball_x + ball_radius >= screenWidth  || ball_x - ball_radius <= 0)
-        {
-            ball_speed_x *= -1;
-        }
-
-        if(ball_y + ball_radius >= screenHeight  || ball_y - ball_radius <= 0)
-        {
-            ball_speed_y *= -1;
-        }
-
-        DrawCircle(ball_x,ball_y,ball_radius, WHITE);
-        EndDrawing();
-
-*/

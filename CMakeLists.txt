@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 project(witness)
-set(TARGET_NAME demo)
+set(TARGET_NAME game)
 set(CMAKE_CXX_STANDARD 17)
 
 aux_source_directory(src/witness DIR_SRCS)
