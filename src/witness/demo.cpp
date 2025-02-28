@@ -53,9 +53,8 @@ void render(Grid& g, const int width, const int height, double marginprop = 0.1,
   disp(GRIDTL);
   disp(GRIDBR);
   disp(std::make_pair(RANKS, FILES));
-  // cout << "\n" << THICKNESS << " " << SPACING << "\n";
 
-  // Draw the grid and the endpoints    
+  // Draw the grid and the endpoints
 
   // Vertical lines
   for (int i = 0; i <= FILES; i++) {
@@ -214,13 +213,12 @@ int main() {
 
   Solver sx;
   RandGrid random;
-  //vector<vector<Entity*>> v;/
 
   random.pathfind();
 
   cout << "Hello World" << endl;
 
-  InitWindow(screenWidth, screenHeight, "");
+  InitWindow(screenWidth, screenHeight, "Witness");
   SetTargetFPS(60);
 
   while (WindowShouldClose() == false){
@@ -231,23 +229,6 @@ int main() {
     else if (randval == 1) g = random.randChallengeStars(2);
     else if (randval == 2) g = random.randBlobs(9, 3, 1);
     else if (randval == 3) g = random.randTriangles(10, 1);
-
-    /*
-
-        std::vector<std::vector<std::shared_ptr<Entity>>> v (7, std::vector<std::shared_ptr<Entity>>(5));
-        for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 5; j++) v[i][j] = std::shared_ptr<Entity>(new Entity());
-        }
-            v[1][3] = std::shared_ptr<Triangle>(new Triangle(1));
-            v[6][0] = std::shared_ptr<Endpoint>(new Endpoint(false));
-            v[0][4] = std::shared_ptr<Endpoint>(new Endpoint(true));
-            g = Grid(v);
-            g.disp();
-            g.defaultGrid();
-
-            g.disp();
-
-        */
 
     render(g, screenWidth, screenHeight, 0.1);
 
@@ -269,32 +250,3 @@ int main() {
   return 0;
 }
 
-
-/*
-
-
-    int ball_x = 100;
-    int ball_y = 100;
-    int ball_speed_x = 5;
-    int ball_speed_y = 5;
-    int ball_radius = 15;
-
-        BeginDrawing();
-        ClearBackground(BLACK);
-        ball_x += ball_speed_x;
-        ball_y += ball_speed_y;
-
-        if(ball_x + ball_radius >= screenWidth  || ball_x - ball_radius <= 0)
-        {
-            ball_speed_x *= -1;
-        }
-
-        if(ball_y + ball_radius >= screenHeight  || ball_y - ball_radius <= 0)
-        {
-            ball_speed_y *= -1;
-        }
-
-        DrawCircle(ball_x,ball_y,ball_radius, WHITE);
-        EndDrawing();
-
-*/
