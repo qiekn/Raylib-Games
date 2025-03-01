@@ -28,6 +28,8 @@ link_directories(lib)
 # targets
 add_subdirectory(./src/classic)
 add_subdirectory(./src/witness)
+add_subdirectory(./src/pong)
+add_subdirectory(./src/clock)
 
 # generate compile_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
